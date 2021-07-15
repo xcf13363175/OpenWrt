@@ -20,7 +20,7 @@ on:
     types: started
 
 env:
-  REPO_URL: https://github.com/Ailick/lede
+  REPO_URL: https://github.com/xcf13363175/lede
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: leanx86.config
