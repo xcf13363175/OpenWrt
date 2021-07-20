@@ -108,6 +108,7 @@ jobs:
           #CONFIG_PACKAGE_kmod-qca-nss-drv-64=n
           #CONFIG_PACKAGE_kmod-qca-nss-drv-pppoe-64=n
           #CONFIG_PACKAGE_kmod-qca-ssdk-nohnat=n
+          CONFIG_PACKAGE_luci-app-pptp-server=n
           EOF
 
           sed -i 's/^[ \t]*//g' ./.config
