@@ -73,6 +73,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-nlbwmon=n
           CONFIG_PACKAGE_luci-app-v2ray-server=n
           CONFIG_PACKAGE_luci-app-unblockmusic=n
+          CONFIG_PACKAGE_UnblockNeteaseMusic=n
           CONFIG_PACKAGE_autosamba=n
           CONFIG_PACKAGE_luci-app-uugamebooster=n
           CONFIG_PACKAGE_ipv6helper=n
