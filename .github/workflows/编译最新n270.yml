@@ -46,7 +46,7 @@ jobs:
 
     - name: Update feeds
       run: |
-          git clone https://github.com/coolsnowwolf/lede openwrt
+          git clone https://github.com/xcf13363175/lede openwrt
           cd openwrt
           sudo sed -i -e '$asrc-git helloworld https://github.com/fw876/helloworld' ./feeds.conf.default
           ./scripts/feeds clean
