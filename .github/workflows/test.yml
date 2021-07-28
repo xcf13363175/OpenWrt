@@ -51,7 +51,7 @@ jobs:
         sudo mkdir -p /workdir-AX6
         sudo chown $USER:$GROUPS /workdir-AX6
         echo "START_DATE=$(date +%s)" >> $GITHUB_ENV
-        
+
     - name: Prepare to Compile
       run: |
         dts=$((${{ env.START_DATE }} + 6600))
@@ -72,7 +72,7 @@ jobs:
         [ -e openwrt ] && cd openwrt && git reset --hard && git pull
         [ ! -e openwrt ] && git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir-AX6/openwrt $GITHUB_WORKSPACE/openwrt
-        
+
     - name: Generate commit info
       id: commitinfo
       run: |
@@ -83,7 +83,6 @@ jobs:
         ./$COMMIT_INFO immortalwrt lean-lede > com_info.log
         echo "DATE_INFO=$(sed -n '2p' com_info.log)" >> $GITHUB_ENV
         echo "RECENT_DATE=$(sed -n '1p' com_info.log)" >> $GITHUB_ENV
-        
 
     - name: Update and install feeds
       run: |
@@ -94,7 +93,7 @@ jobs:
         ./scripts/feeds install -a
         sudo sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
         sudo sed -i 's/root::0:0:99999:7:::/root:$1$l6Tqa73w$Zoavr1irum3walH.ZOQAo1:18674:0:99999:7:::/g' ./package/base-files/files/etc/shadow
-        
+
     - name: Generate configuration file
       run: |
           cd openwrt
