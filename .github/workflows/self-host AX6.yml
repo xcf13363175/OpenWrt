@@ -8,7 +8,7 @@
 # Description: Build Wrt Firmware using GitHub Actions
 #
 
-name: AAAA
+name: self-host AX6
 
 on:
   workflow_dispatch:
