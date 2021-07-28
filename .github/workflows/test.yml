@@ -8,7 +8,7 @@
 # Description: Build Wrt Firmware using GitHub Actions
 #
 
-name: ts
+name: AAAA
 
 on:
   workflow_dispatch:
@@ -30,7 +30,7 @@ env:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: [self-hosted, linux, x64, xc]
 
     steps:
 
