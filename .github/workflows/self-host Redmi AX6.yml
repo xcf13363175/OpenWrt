@@ -10,8 +10,6 @@
 name: AX6 Host
 
 on:
-  repository_dispatch:
-    types: [lean, ax6]
   workflow_dispatch:
   schedule:
     - cron: 0 18 * * *
