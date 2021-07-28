@@ -36,11 +36,11 @@ jobs:
           sudo -E apt-get clean
           sudo timedatectl set-timezone "Asia/Shanghai"
           df -h
-          
+
     - name: Clone source code
       run: |
         git clone https://github.com/coolsnowwolf/lede.git lede
-        
+
     - name: Update feeds
       run: |
         cd lede
