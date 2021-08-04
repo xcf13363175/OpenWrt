@@ -67,6 +67,7 @@ jobs:
         chmod +x $DIY_P1_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
+        sudo echo "47.89.66.205 cowtransfer.com" | sudo tee -a /etc/hosts
 
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
