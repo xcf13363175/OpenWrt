@@ -68,6 +68,7 @@ jobs:
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
         sudo echo "47.89.66.205 cowtransfer.com" | sudo tee -a /etc/hosts
+        sudo sed -i 's/5.4/5.10/g' ./target/linux/x86/Makefile
 
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
