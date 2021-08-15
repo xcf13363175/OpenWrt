@@ -20,14 +20,13 @@ sed -i 's/root::0:0:99999:7:::/root:$1$l6Tqa73w$Zoavr1irum3walH.ZOQAo1:18674:0:9
 # Add luci-app-ssr-plus
 pushd package/lean
 git clone --depth=1 https://github.com/fw876/helloworld
-svn co https://github.com/xiaorouji/openwrt-passwall/luci-app-passwall
 
 # Add luci-app-onliner. (need luci-app-nlbwmon)
 #git clone --depth=1 https://github.com/rufengsuixing/luci-app-onliner
 
 # Add luci-app-socat 
-svn co https://github.com/Lienol/openwrt-package/trunk/luci-app-socat
-#svn co https://github.com/xiaorouji/openwrt-passwall/trunk/luci-app-passwall
+#svn co https://github.com/Lienol/openwrt-package/trunk/luci-app-socat
+svn co https://github.com/xiaorouji/openwrt-passwall/trunk/luci-app-passwall
 # Add luci-theme-argon
 #git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon
 #git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config
