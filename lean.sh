@@ -21,7 +21,7 @@ sed -i 's/root::0:0:99999:7:::/root:$1$l6Tqa73w$Zoavr1irum3walH.ZOQAo1:18674:0:9
 pushd package/lean
 git clone --depth=1 https://github.com/fw876/helloworld
 #git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall
-sed -i 's/22,53,587,465,995,993,143,80,443,853,9418/22,53,587,465,995,993,143,80,443,853,9418,8096/g' ./helloworld/luci-app-ssr-plus/root/etc/init.d/shadowsocksr
+sed -i 's/22,53,587,465,995,993,143,80,443,853,9418/22,53,587,465,995,993,143,80,443,853,9418,8080,8096/g' ./helloworld/luci-app-ssr-plus/root/etc/init.d/shadowsocksr
 # Add luci-app-onliner. (need luci-app-nlbwmon)
 #git clone --depth=1 https://github.com/rufengsuixing/luci-app-onliner
 
