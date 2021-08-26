@@ -35,7 +35,7 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
 
     steps:
     - name: Checkout
@@ -67,7 +67,7 @@ jobs:
         chmod +x $DIY_P1_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
-        sudo echo "47.246.22.231 cowtransfer.com" | sudo tee -a /etc/hosts
+        #sudo echo "47.246.22.231 cowtransfer.com" | sudo tee -a /etc/hosts
         sudo sed -i 's/5.4/5.10/g' ./target/linux/x86/Makefile
 
     - name: Update feeds
