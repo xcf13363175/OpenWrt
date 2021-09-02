@@ -32,7 +32,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
       with:
-        ref: main
+        ref: coolsnowwolf/lede@master
         fetch-depth: 0
 
     - name: cache
