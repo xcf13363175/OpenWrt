@@ -61,6 +61,7 @@ jobs:
       run: |
         df -hT $PWD
         mkdir ../tmphold && mv * .git* ../tmphold/
+        rm ./lede
         git clone $REPO_URL -b $REPO_BRANCH .
         mv ../tmphold/config/* ./config/
         rm ../tmphold/config -r
