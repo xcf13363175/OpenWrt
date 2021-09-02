@@ -32,13 +32,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
       with:
-        ref: coolsnowwolf/lede@master
-        fetch-depth: 0
+       fetch-depth: 0
 
     - name: cache
       uses: klever1988/cachewrtbuild@main
       with:
-          ccache: true
+       ccache: true
 
     - name: Initialization environment
       env:
