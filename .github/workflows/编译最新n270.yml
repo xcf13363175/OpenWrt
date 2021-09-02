@@ -34,11 +34,6 @@ jobs:
       with:
        fetch-depth: 0
 
-    - name: cache
-      uses: klever1988/cachewrtbuild@main
-      with:
-       ccache: true
-
     - name: Initialization environment
       env:
         DEBIAN_FRONTEND: noninteractive
@@ -51,6 +46,11 @@ jobs:
         sudo timedatectl set-timezone "$TZ"
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
+
+    - name: cache
+      uses: klever1988/cachewrtbuild@main
+      with:
+        ccache: 'true'
 
     - name: Update feeds
       run: |
