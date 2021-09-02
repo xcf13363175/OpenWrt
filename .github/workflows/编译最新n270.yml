@@ -23,7 +23,7 @@ env:
   UPLOAD_WETRANSFER: true
   UPLOAD_RELEASE: false
   TZ: Asia/Shanghai
-  
+
 jobs:
   build:
     runs-on: ubuntu-20.04
@@ -31,7 +31,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
       with:
-        ref: master
+        ref: main
         fetch-depth: 0
 
     - name: cache
