@@ -16,7 +16,13 @@ on:
   watch:
     types: started
 
-
+env:
+  UPLOAD_BIN_DIR: false
+  UPLOAD_FIRMWARE: true
+  UPLOAD_COWTRANSFER: true
+  UPLOAD_WETRANSFER: true
+  UPLOAD_RELEASE: false
+  TZ: Asia/Shanghai
 
 jobs:
   build:
@@ -30,8 +36,8 @@ jobs:
 
     - name: cache
       uses: klever1988/cachewrtbuild@main
-      with: 
-         ccache: 'true'
+      with:
+          ccache: true
 
     - name: Initialization environment
       env:
