@@ -30,6 +30,14 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@main
+      with:
+        ref: master
+        fetch-depth: 0
+
+    - name: cache
+      uses: klever1988/cachewrtbuild@main
+      with:
+        ccache: 'true'
 
     - name: Initialization environment
       env:
@@ -138,7 +146,7 @@ jobs:
           EOF
 
           sed -i 's/^[ \t]*//g' ./.config
-          make defconfig
+          echo -e 'CONFIG_DEVEL=y\nCONFIG_CCACHE=y' >> .config; make defconfig
 
     - name: Download package
       id: package
