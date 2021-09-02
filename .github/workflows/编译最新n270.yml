@@ -47,11 +47,6 @@ jobs:
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
 
-    - name: cache
-      uses: klever1988/cachewrtbuild@main
-      with:
-        ccache: 'true'
-
     - name: Update feeds
       run: |
           git clone https://github.com/coolsnowwolf/lede openwrt
@@ -69,6 +64,11 @@ jobs:
           cd ./package/lean
           # Add luci-app-socat 
           sudo svn export https://github.com/Lienol/openwrt-package/trunk/luci-app-socat
+
+    - name: cache
+      uses: klever1988/cachewrtbuild@main
+      with:
+        ccache: 'true'
 
     - name: Generate configuration file
       run: |
