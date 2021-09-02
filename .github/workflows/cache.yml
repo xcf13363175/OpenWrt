@@ -60,7 +60,7 @@ jobs:
     - name: Clone source code
       run: |
         df -hT $PWD
-        git clone $REPO_URL -b $REPO_BRANCH .
+        git clone $REPO_URL
         ln -sf /workdir/lede $GITHUB_WORKSPACE/lede
 
     - name: Load custom feeds
