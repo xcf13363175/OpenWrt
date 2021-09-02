@@ -23,16 +23,13 @@ env:
   UPLOAD_WETRANSFER: true
   UPLOAD_RELEASE: false
   TZ: Asia/Shanghai
-
+  
 jobs:
   build:
     runs-on: ubuntu-20.04
-    if: github.event.repository.owner.id == github.event.sender.id
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
-      with:
-       fetch-depth: 0
+      uses: actions/checkout@main
 
     - name: Initialization environment
       env:
@@ -46,14 +43,9 @@ jobs:
         sudo timedatectl set-timezone "$TZ"
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
-
     - name: Update feeds
       run: |
-          mkdir ../tmphold && mv * .git* ../tmphold/
           git clone https://github.com/coolsnowwolf/lede openwrt
-          mv ../tmphold/config/* ./config/
-          rm ../tmphold/config -r
-          mv ../tmphold/* ./
           cd openwrt
           sudo sed -i -e '$asrc-git helloworld https://github.com/fw876/helloworld' ./feeds.conf.default
           ./scripts/feeds clean
@@ -68,12 +60,6 @@ jobs:
           cd ./package/lean
           # Add luci-app-socat 
           sudo svn export https://github.com/Lienol/openwrt-package/trunk/luci-app-socat
-
-    - name: cache
-      uses: klever1988/cachewrtbuild@main
-      with:
-        ccache: 'true'
-
     - name: Generate configuration file
       run: |
           cd openwrt
@@ -148,10 +134,8 @@ jobs:
           CONFIG_PACKAGE_luci-app-qbittorrent=n
           CONFIG_PACKAGE_luci-app-pptp-server=n
           EOF
-
           sed -i 's/^[ \t]*//g' ./.config
-          echo -e 'CONFIG_DEVEL=y\nCONFIG_CCACHE=y' >> .config; make defconfig
-
+          make defconfig
     - name: Download package
       id: package
       run: |
@@ -160,7 +144,6 @@ jobs:
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
-
     - name: Compile the firmware
       id: compile
       run: |
@@ -171,7 +154,6 @@ jobs:
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
         [ -s DEVICE_NAME ] && echo "DEVICE_NAME=_$(cat DEVICE_NAME)" >> $GITHUB_ENV
         echo "FILE_DATE=_$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
-
     - name: Check space usage
       if: (!cancelled())
       run: df -hT
@@ -179,7 +161,6 @@ jobs:
       run: |
           cd openwrt/bin/targets/*/*
           #gzip *.img
-
     - name: Upload bin directory
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
@@ -195,7 +176,6 @@ jobs:
         rm -rf packages
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "::set-output name=status::success"
-
     - name: Upload firmware directory
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
@@ -211,7 +191,6 @@ jobs:
         ./transfer cow --block 2621440 -s -p 64 --no-progress ${FIRMWARE} 2>&1 | tee cowtransfer.log
         echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
         echo "::set-output name=url::$(cat cowtransfer.log | grep https | cut -f3 -d" ")"
-
     - name: Upload firmware to WeTransfer
       id: wetransfer
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_WETRANSFER == 'true' && !cancelled()
@@ -220,7 +199,6 @@ jobs:
         ./transfer wet -s -p 16 --no-progress ${FIRMWARE} 2>&1 | tee wetransfer.log
         echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
         echo "::set-output name=url::$(cat wetransfer.log | grep https | cut -f3 -d" ")"
-
     - name: Generate release tag
       id: tag
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
@@ -230,7 +208,6 @@ jobs:
         [ $UPLOAD_COWTRANSFER = true ] && echo "🔗 [Cowtransfer](${{ steps.cowtransfer.outputs.url }})" >> release.txt
         [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
         echo "::set-output name=status::success"
-
     - name: Upload firmware to release
       uses: softprops/action-gh-release@v1
       if: steps.tag.outputs.status == 'success' && !cancelled()
