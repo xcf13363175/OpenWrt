@@ -49,6 +49,7 @@ jobs:
 
     - name: Update feeds
       run: |
+          mkdir ../tmphold && mv * .git* ../tmphold/
           git clone https://github.com/coolsnowwolf/lede openwrt
           cd openwrt
           mv ../tmphold/config/* ./config/
