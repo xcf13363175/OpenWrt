@@ -56,6 +56,7 @@ jobs:
         sudo timedatectl set-timezone "$TZ"
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
+
     - name: Clone source code
       run: |
         df -hT $PWD
@@ -64,8 +65,7 @@ jobs:
         mv ../tmphold/config/* ./config/
         rm ../tmphold/config -r
         mv ../tmphold/* ./
-        
-        
+
     - name: cache
       uses: klever1988/cachewrtbuild@main
       with:
