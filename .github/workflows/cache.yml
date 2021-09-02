@@ -60,8 +60,8 @@ jobs:
     - name: Clone source code
       run: |
         df -hT $PWD
-        git clone $REPO_URL -b $REPO_BRANCH openwrt
-        ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
+        git clone $REPO_URL -b $REPO_BRANCH .
+        ln -sf /workdir/lede $GITHUB_WORKSPACE/lede
 
     - name: Load custom feeds
       run: |
@@ -85,7 +85,7 @@ jobs:
       uses: klever1988/cachewrtbuild@test
       with:
         ccache: 'true'
-        prefix: '/workdir/openwrt'
+        prefix: '/workdir/lede'
 
     - name: Download package
       id: package
