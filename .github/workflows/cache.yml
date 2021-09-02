@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: cache
+name: Build-OpenWrt_X64
 
 on:
   repository_dispatch:
@@ -61,7 +61,8 @@ jobs:
         mv ../tmphold/config/* ./config/
         rm ../tmphold/config -r
         mv ../tmphold/* ./
-
+        
+        
     - name: cache
       uses: klever1988/cachewrtbuild@main
       with:
@@ -72,7 +73,6 @@ jobs:
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF feeds.conf.default
         chmod +x $DIY_P1_SH
         $GITHUB_WORKSPACE/$DIY_P1_SH
-        sudo sed -i 's/5.4/5.10/g' ./target/linux/x86/Makefile
     - name: Update feeds
       run: ./scripts/feeds update -a
 
