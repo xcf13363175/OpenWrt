@@ -87,11 +87,6 @@ jobs:
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
-    - name: cache
-      uses: klever1988/cachewrtbuild@test
-      with:
-        ccache: 'true'
-        prefix: '/workdir/lede'
     - name: Download package
       id: package
       run: |
