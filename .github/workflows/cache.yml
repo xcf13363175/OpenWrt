@@ -67,7 +67,7 @@ jobs:
       uses: klever1988/cachewrtbuild@test
       with:
         ccache: 'true'
-        prefix: '/workdir/openwrt'
+        prefix: '/workdir'
 
     - name: Load custom feeds
       run: |
