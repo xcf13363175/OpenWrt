@@ -110,7 +110,7 @@ jobs:
       run: df -hT
     - name: Compress Img Files
       run: |
-          cd openwrt/bin/targets/x86/64
+          cd openwrt/bin/targets/*/*
           #gzip *.img
     - name: Upload bin directory
       uses: actions/upload-artifact@main
