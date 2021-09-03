@@ -1,0 +1,46 @@
+#!/bin/bash
+#
+# Copyright (c) 2019-2020 P3TERX <https://p3terx.com>
+#
+# This is free software, licensed under the MIT License.
+# See /LICENSE for more information.
+#
+# https://github.com/P3TERX/Actions-OpenWrt
+# File name: diy-part2.sh
+# Description: OpenWrt DIY script part 2 (After Update feeds)
+
+
+
+# Modify default IP
+sed -i 's/root::0:0:99999:7:::/root:$1$l6Tqa73w$Zoavr1irum3walH.ZOQAo1:18674:0:99999:7:::/g' ./package/base-files/files/etc/shadow
+sudo sed -i 's/5.4/5.10/g' ./target/linux/x86/Makefile
+#sudo echo "47.246.22.231 cowtransfer.com" | sudo tee -a /etc/hosts
+# 去除 luci-app-socat与socat冲突文件
+sudo sed -i '/INSTALL_CONF/d' feeds/packages/net/socat/Makefile
+sudo sed -i '/socat\.init/d' feeds/packages/net/socat/Makefile
+
+
+# Add luci-app-ssr-plus
+pushd package/lean
+git clone --depth=1 https://github.com/fw876/helloworld
+#git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall
+#sed -i 's/22,53,587,465,995,993,143,80,443,853,9418/22,53,587,465,995,993,143,80,443,853,9418,8080,8096/g' ./helloworld/luci-app-ssr-plus/root/etc/init.d/shadowsocksr
+# Add luci-app-onliner. (need luci-app-nlbwmon)
+#git clone --depth=1 https://github.com/rufengsuixing/luci-app-onliner
+
+# Add luci-app-socat 
+svn co https://github.com/Lienol/openwrt-package/trunk/luci-app-socat
+#svn co https://github.com/xiaorouji/openwrt-passwall/trunk/luci-app-passwall
+# Add luci-theme-argon
+#git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon
+#git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config
+
+
+# Use immortalwrt's luci-app-netdata
+#svn co https://github.com/immortalwrt/immortalwrt/trunk/package/ntlf9t/luci-app-netdata
+popd
+# Add netdata
+#pushd feeds/packages/admin
+#rm -rf netdata
+#svn co https://github.com/immortalwrt/packages/trunk/admin/netdata
+#popd
