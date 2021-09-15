@@ -20,7 +20,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
 
     steps:
     - name: Checkout
@@ -30,15 +30,12 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-          docker rmi `docker images -q`
-          sudo rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d
-          sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php* android*
-          sudo -E apt-get update
-          sudo -E apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs gcc-multilib g++-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler antlr3 gperf swig
-          sudo -E apt-get -y autoremove --purge
-          sudo -E apt-get clean
-          sudo timedatectl set-timezone "Asia/Shanghai"
-          df -h
+        sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
+        sudo -E apt-get -qq update
+        sudo -E apt-get -qq install $(curl -fsSL git.io/depends-ubuntu-2004)
+        sudo -E apt-get -qq autoremove --purge
+        sudo -E apt-get -qq clean
+        sudo timedatectl set-timezone "Asia/Shanghai"
 
     - name: Clone source code
       run: |
@@ -92,11 +89,12 @@ jobs:
           CONFIG_PACKAGE_luci-app-filetransfer=n
           CONFIG_PACKAGE_luci-app-ssr-plus=y
           CONFIG_PACKAGE_luci-app-turboacc=y
-          CONFIG_PACKAGE_TURBOACC_INCLUDE_SHORTCUT_FE=y
-          CONFIG_PACKAGE_TURBOACC_INCLUDE_OFFLOADING=n
-          CONFIG_PACKAGE_TURBOACC_INCLUDE_DNSPROXY=y
-          CONFIG_PACKAGE_TURBOACC_INCLUDE_DNSFORWARDER=n
-          CONFIG_PACKAGE_TURBOACC_INCLUDE_BBR_CCA=y
+          CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_OFFLOADING=y
+          CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_SHORTCUT_FE_DRV=y
+          CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_SHORTCUT_FE=y
+          CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_BBR_CCA=y
+          CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_DNSFORWARDER=n
+          CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_DNSPROXY=y
           CONFIG_PACKAGE_luci-app-zerotier=y
           CONFIG_PACKAGE_odhcpd-ipv6only=n
           CONFIG_PACKAGE_odhcp6c=n
