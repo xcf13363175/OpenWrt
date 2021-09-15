@@ -54,7 +54,7 @@ jobs:
         sudo sed -i '156a +               pll &= ~(0x7ff);\n+               pll |=  (0x362);\n+               rt_memc_w32(pll,MEMC_REG_CPU_PLL);\n+               for(i=0;i<1024;i++);' target/linux/ramips/patches-5.4/102-mt7621-fix-cpu-clk-add-clkdev.patch
         #sudo sed -i 's/5.4/4.19/g' target/linux/ipq40xx/Makefile
         sudo sed -i 's/root::0:0:99999:7:::/root:$1$l6Tqa73w$Zoavr1irum3walH.ZOQAo1:18674:0:99999:7:::/g' ./package/base-files/files/etc/shadow
-        sudo sed -i 's/5.4/5.10/g' ./target/linux/mediatek/Makefile
+        sudo sed -i 's/5.4/5.10/g' ./target/linux/ramips/Makefile
 
     - name: Generate configuration file
       run: |
