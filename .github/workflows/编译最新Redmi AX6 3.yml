@@ -50,6 +50,7 @@ jobs:
         ./scripts/feeds install -a
         sudo sed -i 's/192.168.1.1/192.168.3.1/g' package/base-files/files/bin/config_generate
         sudo sed -i 's/root::0:0:99999:7:::/root:$1$l6Tqa73w$Zoavr1irum3walH.ZOQAo1:18674:0:99999:7:::/g' ./package/base-files/files/etc/shadow
+        sudo sed -i 's/22,53,587,465,995,993,143,80,443,853,9418/22,53,587,465,995,993,143,80,443,853,9418,8080,8096/g' ./helloworld/luci-app-ssr-plus/root/etc/init.d/shadowsocksr
 
     - name: Generate configuration file
       run: |
@@ -97,7 +98,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_SHORTCUT_FE=n
           CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_BBR_CCA=y
           CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_DNSFORWARDER=n
-          CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_DNSPROXY=y
+          CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_DNSPROXY=n
           CONFIG_PACKAGE_luci-app-zerotier=y
           CONFIG_PACKAGE_odhcpd-ipv6only=n
           CONFIG_PACKAGE_odhcp6c=n
