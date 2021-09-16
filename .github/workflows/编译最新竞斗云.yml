@@ -49,7 +49,7 @@ jobs:
         ./scripts/feeds update -a
         ./scripts/feeds install -a
         sudo sed -i 's/root::0:0:99999:7:::/root:$1$l6Tqa73w$Zoavr1irum3walH.ZOQAo1:18674:0:99999:7:::/g' ./package/base-files/files/etc/shadow
-        sudo sed -i 's/5.4/5.10/g' ./target/linux/ipq40xx/Makefile
+        #sudo sed -i 's/5.4/5.10/g' ./target/linux/ipq40xx/Makefile
 
     - name: Generate configuration file
       run: |
@@ -61,7 +61,7 @@ jobs:
           CONFIG_TARGET_ipq40xx=y
           CONFIG_TARGET_ipq40xx_DEVICE_p2w_r619ac-128m=y
           CONFIG_PACKAGE_luci-app-adbyby-plus=y
-          #CONFIG_IPV6=n
+          CONFIG_IPV6=n
           CONFIG_PACKAGE_luci-app-vsftpd=n
           CONFIG_PACKAGE_luci-app-xlnetacc=n
           CONFIG_PACKAGE_luci-app-accesscontrol=n
@@ -90,9 +90,9 @@ jobs:
           CONFIG_PACKAGE_luci-app-filetransfer=n
           CONFIG_PACKAGE_luci-app-ssr-plus=y
           CONFIG_PACKAGE_luci-app-turboacc=y
-          CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_OFFLOADING=y
+          CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_OFFLOADING=n
           CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_SHORTCUT_FE_DRV=n
-          CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_SHORTCUT_FE=n
+          CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_SHORTCUT_FE=y
           CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_BBR_CCA=y
           CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_DNSFORWARDER=n
           CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_DNSPROXY=y
