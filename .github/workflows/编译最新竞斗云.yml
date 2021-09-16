@@ -61,7 +61,7 @@ jobs:
           CONFIG_TARGET_ipq40xx=y
           CONFIG_TARGET_ipq40xx_DEVICE_p2w_r619ac-128m=y
           CONFIG_PACKAGE_luci-app-adbyby-plus=y
-          CONFIG_IPV6=n
+          #CONFIG_IPV6=n
           CONFIG_PACKAGE_luci-app-vsftpd=n
           CONFIG_PACKAGE_luci-app-xlnetacc=n
           CONFIG_PACKAGE_luci-app-accesscontrol=n
