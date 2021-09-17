@@ -44,13 +44,15 @@ jobs:
     - name: Update feeds
       run: |
         cd lede
-        sudo sed -i '$asrc-git helloworld https://github.com/fw876/helloworld' ./feeds.conf.default
         ./scripts/feeds clean
         ./scripts/feeds update -a
         ./scripts/feeds install -a
         sudo sed -i 's/192.168.1.1/192.168.3.1/g' package/base-files/files/bin/config_generate
         sudo sed -i 's/root::0:0:99999:7:::/root:$1$l6Tqa73w$Zoavr1irum3walH.ZOQAo1:18674:0:99999:7:::/g' ./package/base-files/files/etc/shadow
+        pushd package/lean
+        git clone --depth=1 https://github.com/fw876/helloworld
         sudo sed -i 's/22,53,587,465,995,993,143,80,443,853,9418/22,53,587,465,995,993,143,80,443,853,9418,8080,8096/g' ./helloworld/luci-app-ssr-plus/root/etc/init.d/shadowsocksr
+        popd
 
     - name: Generate configuration file
       run: |
